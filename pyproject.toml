@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "osm-routing-system"
+version = "0.1.0"
+description = "Production-style routing algorithm benchmark built on OpenStreetMap graph data"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "matplotlib",
+    "numpy",
+    "pillow",
+]
+
+[project.scripts]
+osm-routing = "osm_routing_system.cli:main"
+osm-routing-render = "osm_routing_system.generate_report_maps:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.12",
+    "ruff>=0.6",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = ["grader"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unreachable = true
+
+[tool.uv]
+package = true
